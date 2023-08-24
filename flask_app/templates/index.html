@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <center><h1>welcome</h1>
+        <h2>to luminar</h2>
+        <h3>technolab</h3>
+        <input type="=text" id="word" placeholder='enter your word'>
+        <input type="text" id="num" placeholder="enter yout number">
+        <button id='predict'>predict</button>
+        <p id='predictionResult'></p></center>
+        <script>
+            $(document).ready(function () {
+                $("#predict").click(function () {
+
+                  var inputText=$("#word").val();
+                  var numwords=$("#num").val();   
+                  console.log(inputText) 
+                  console.log(numwords) 
+                  $.ajax({
+                    type:"POST",   
+                    url:"/predict",
+                    data:{input_Text:inputText,num_words:numwords},
+                    success:function(response){
+                      $("#predictionResult").text("predicted word :"+response.generated_text);
+
+                    }
+
+                  })
+
+
+                })
+
+            })
+
+
+
+        </script>
+        
+</body>
+</html>
